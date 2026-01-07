@@ -1,5 +1,82 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+/* Propiedades personalizadas */
+:root {
+  /* fuentes */
+  --font-primary: 'Montserrat', sans-serif;
+
+  /* Colores de Contenedores Principales */
+  --bg-body: #1e1f22;
+  --bg-container: #26272b;
+
+  /* colores de Textos */
+    --text-primary: #f5f5f5;
+    --text-secondary: #a0a0a5;
+  
+  /* bordes */
+  --border-radius: 4px;
+  --border-size: 1px;
+  --border-container: #3a3b40;
+
+
+  /* espacios */
+  --space-l: 1rem;
+  --space-n: .8rem;
+  --space-s: .5rem;
+
+}
+
 body {
-  background-color: black;
-  color: white;
-  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  min-height: 100vh;
+
+
+  font-family: 'Montserrat', sans-serif;
+  /* font-family: var(--font-primary) */
+  padding: var(--space-l);
+  background-color: var(--bg-body);
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+
+  width: 100%;
+  max-width: 640px;
+  height: fit-content;
+
+  padding: var(--space-n);
+
+  border-width: var(--space-size);
+  border-style: solid;
+  border-color: var(--border-container);
+
+  border-radius: var(--border-radius);
+  background-color: var(--bg-container);
+}
+
+.titulo {
+  font-size: 1.6rem;
+  color: var(--text-primary);
+}
+
+.mensaje {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.tarea-entrada {
+  width: 100%;
+  font-size: 1.2rem;
+  padding: var(--space-l);
+  border-radius: var(--border-radius);
+  border: none;
 }
