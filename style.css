@@ -210,5 +210,7 @@ body {
 }
 
 .tarea-completada {
+  text-decoration: line-through;
+  color: var(--text-secondary);
   background-color: var(--bg-task-completada);
 }

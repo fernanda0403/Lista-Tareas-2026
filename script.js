@@ -1,8 +1,10 @@
 /* Referencias al documento del DOM */
 
-const tareaEntrada = document.getElementById ("tareaEntrada");
-const botonAgregar = document.getElementById ("botonAgregar")
-const contenedorTareas = document.getElementById ("contenedorTareas")
+const tareaEntrada = document.getElementById("tareaEntrada");
+const botonAgregar = document.getElementById("botonAgregar")
+const contenedorTareas = document.getElementById("contenedorTareas")
+const mensaje = document.getElementById("mensaje")
+
 
 /* función para crear el elemento tarea (Función creadora del nodo Tarea) */
 function crearElementoTarea() {
@@ -27,19 +29,72 @@ function crearElementoTarea() {
   //agregar el texto del usuario
   tareaTexto.innerText = tareaEntrada.value;
 
- // Retornar
- return tareaContenedor;
+  // Escuchdores de los iconos
+  iconoCompletada.addEventListener("click", (e) => {
+    // codigo que se ejecuta
+    const tareaElemento = e.target.parentNode.parentNode
+    const esCompletada = tareaElemento.classList.contains("tarea-completada")
+    
+    tareaElemento.classList.toggle("tarea-completada")
+    if (esCompletada) {
+      e.target.classList.remove("bi-dash-circle")
+      e.target.classList.add("bi-check-circle")
+    }else {
+      e.target.classList.remove("bi-check-circle")
+      e.target.classList.add("bi-dash-circle")
+    }
+  })
+
+  iconoEliminar.addEventListener("click", (e) => {
+    // codigo que se ejecuta
+    const tareaElemento = e.target.parentNode.parentNode
+    tareaElemento.remove()
+  })
+
+  // Retornar
+  return tareaContenedor;
 }
- 
- /* escuchador */
- botonAgregar.addEventListener("click", agregarTarea)
+
+/* escuchador */
+botonAgregar.addEventListener("click", agregarTarea)
 
 /* funcion agregar el elemento tarea */
- function agregarTarea() {
-  //traemos el elemento retornado por la funcion crearElement
-  const elementoTarea  = crearElementoTarea ();
-  contenedorTareas.append(elementoTarea)
+function agregarTarea() {
+  /* generar la constante para evaluar si hay texto o no */
+  const texto = tareaEntrada.value.trim()
 
-  //reiniciar el input
-  tareaEntrada.value=""
- }
+  /* evaluar la contaste texto */
+  if (texto) {
+    //traemos el elemento retornado por la funcion crearElement
+    const elementoTarea = crearElementoTarea();
+    contenedorTareas.append(elementoTarea)
+
+    //reiniciar el input
+    tareaEntrada.value = ""
+
+    /* mostrar tarea satisfactoriamente */
+    mensaje.textContent = "Tarea creada satisfactoriamente! 😝"
+
+  } else {
+    mensaje.textContent = "No escribiste nada 😠"
+  }
+}
+
+/* hacemos que al precionar la tecla enter en el input se agregue la tarea */
+
+tareaEntrada.addEventListener("keydown", (e) => {
+  if (e.key == "Enter") {
+    agregarTarea();
+  }
+})
+
+/* mostrar mensaje al escribir */
+tareaEntrada.addEventListener("input", (e) => {
+  // evaluamos la tecla precionada
+  if (tareaEntrada.value.trim() === "") {
+    mensaje.textContent = "Escribe tu proxima Tarea! 😃"
+  } else {
+    mensaje.textContent = "Al finalizar preciona enter 🤭"
+
+  }
+})
